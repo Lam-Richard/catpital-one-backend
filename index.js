@@ -5,8 +5,8 @@ const jsonParser = bodyParser.json();
 
 const Alpaca = require('@alpacahq/alpaca-trade-api');
 const alpaca = new Alpaca({
-    keyId: 'KEY',
-    secretKey: 'OTHERKEY',
+    keyId: 'PKRTDHD80018SUDO4TST',
+    secretKey: 'rgCzkzaXjpvUAbrmyGQCr19XpycPgUwY0h42v1gN',
     paper: true,
     usePolygon: false
 });
@@ -32,7 +32,6 @@ app.get('/account', (req, res) => {
 
 // Gets information about a specific asset
 app.get('/asset/:symbol', (req, res) => {
-
     alpaca.getAsset(req.params.symbol).then(data => {
         res.send(data);
     }).catch(e => {
@@ -92,8 +91,23 @@ app.get('/orders', (req, res) => {
     })
 })
 
+// Get last quote must pass symbol
+app.get('/lastQuote/:symbol', (req, res) => {
+    alpaca.lastQuote(req.params.symbol).then(data => {
+        res.send(data);
+    }).catch(e => {
+        res.send(e);
+    })
+})
 
-
+// Get last trade must pass symbol
+app.get('/lastTrade/:symbol', (req, res) => {
+    alpaca.lastTrade(req.params.symbol).then(data => {
+        res.send(data);
+    }).catch(e => {
+        res.send(e);
+    })
+})
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
