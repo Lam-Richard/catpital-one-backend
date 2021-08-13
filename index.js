@@ -11,7 +11,7 @@ const alpaca = new Alpaca({
 });
 const app = express();
 
-const port = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
   console.log("connected");
@@ -132,6 +132,6 @@ app.get("/lastTrade/:symbol", (req, res) => {
     });
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Example app listening at http://localhost:${PORT}`);
 });
